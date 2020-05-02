@@ -74,3 +74,4 @@ describe('redux props', () => {
     expect(guessWordProp).toBeInstanceOf(Function)
   })
 })
+

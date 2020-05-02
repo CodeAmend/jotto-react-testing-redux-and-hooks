@@ -1,7 +1,7 @@
 /**
  * Main Reducer
  *
- * @returns {state}
+ * @returns {State}
  */
 export default (state, action) => {
   return null;

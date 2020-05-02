@@ -1,9 +1,11 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import Congrats from './Congrats';
 import {findByTestAttr, checkProps} from './test/testUtils';
 
+
+const defaultProps = { success: false }
 
 /**
  * Factory function to create ShallowWrapper for the Congrats component
@@ -11,7 +13,8 @@ import {findByTestAttr, checkProps} from './test/testUtils';
  * @return {ShallowWrapper}
  */
 const setup = (props={}) => {
-  return shallow(<Congrats {...props} />)
+  const setupProps = { ...defaultProps, ...props };
+  return shallow(<Congrats {...setupProps} />)
 }
 
 test('renders without error', () => {
@@ -21,7 +24,7 @@ test('renders without error', () => {
 })
 
 test('renders no text when `succes` prop is false', () => {
-  const wrapper = setup({ success: false });
+  const wrapper = setup();
   const component = findByTestAttr(wrapper, 'component-congrats');
   expect(component.text()).toBe('');
 })

@@ -1,13 +1,21 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { checkProps, findByTestAttr } from './test/testUtils';
+import languageContext from './contexts/languageContext';
 
 import Input from './Input';
 
 
 
-const setup = (secretWord='party') => {
-  return shallow(<Input secretWord={secretWord} />);
+const setup = ({ language, secretWord }={}) => {
+  language = language || 'en';
+  secretWord = secretWord || 'party';
+
+  return mount(
+    <languageContext.Provider value={language}>
+      <Input secretWord={secretWord} />
+    </languageContext.Provider>
+  );
 }
 
 test('Input renders without error', () => {
@@ -49,4 +57,30 @@ describe('state controlled input field', () => {
     expect(mockSetCurrentGuess).toHaveBeenCalledWith('');
     expect(mockPreventDefault).toHaveBeenCalled();
   })
+})
+
+
+describe('languageContext', () => {
+  test('input placeholder has correct english language', () => {
+    const wrapper = setup({ language: 'en' });
+    const inputBox = findByTestAttr(wrapper, 'input-box')
+    expect(inputBox.props().placeholder).toBe('enter guess');
+  });
+  test('input placeholder has correct emoji language', () => {
+    const wrapper = setup({ language: 'emoji' });
+    const inputBox = findByTestAttr(wrapper, 'input-box')
+    expect(inputBox.props().placeholder).toBe('⌨️🤔');
+  });
+
+  test('button text has correct english language', () => {
+    const wrapper = setup({ language: 'en' });
+    const inputBox = findByTestAttr(wrapper, 'submit-button')
+    expect(inputBox.text()).toBe('Submit');
+  });
+
+  test('button text has correct emoji language', () => {
+    const wrapper = setup({ language: 'emoji' });
+    const inputBox = findByTestAttr(wrapper, 'submit-button')
+    expect(inputBox.text()).toBe('🚀');
+  });
 });

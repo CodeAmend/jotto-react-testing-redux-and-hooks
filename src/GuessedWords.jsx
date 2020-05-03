@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-const GuessedWords = (props) => {
+const GuessedWords = () => {
+  let guessedWords = [];
   let contents;
-  if (props.guessedWords.length === 0) {
+  if (contents === true) {
     contents = (
       <span data-test="guess-instructions">
         Try to guess the secret word!
       </span>
     )
   } else {
-    const guessedWordsRows = props.guessedWords.map((word, index) => (
+    const guessedWordsRows = guessedWords.map((word, index) => (
       <tr key={index} data-test="guessed-word">
         <td>{word.guessedWord}</td>
         <td>{word.letterMatchCount}</td>

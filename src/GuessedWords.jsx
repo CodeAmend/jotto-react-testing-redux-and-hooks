@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import languageContext from './contexts/languageContext';
+import stringModule from './helpers/strings';
 
 
-const GuessedWords = () => {
-  let guessedWords = [];
+const GuessedWords = ({ guessedWords }) => {
+  const language = React.useContext(languageContext);
   let contents;
-  if (contents === true) {
+  if (!guessedWords.length) {
     contents = (
       <span data-test="guess-instructions">
-        Try to guess the secret word!
+        {stringModule.getStringByLanguage(language, 'guessPrompt')}
       </span>
     )
   } else {

@@ -15,7 +15,7 @@ const setup = (secretWord) => {
 
   const mockUseReducer = jest.fn()
     .mockReturnValue([
-      { secretWord },
+      { secretWord, language: 'en' },
       jest.fn(),
     ]);
 

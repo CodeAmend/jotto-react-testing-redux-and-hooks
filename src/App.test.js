@@ -21,7 +21,6 @@ const setup = (secretWord) => {
 
   React.useReducer = mockUseReducer;
 
-  // TODO: mount because useEffect does not work on shallow
   return mount(<App />);
 }
 

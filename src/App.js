@@ -43,12 +43,13 @@ const App = () => {
         <p>Loading secret word</p>
       </div>
     )
+  } else {
+    return (
+      <div className="container" data-test="component-app">
+        <Input secretWord={state.getSecretWord} />
+      </div>
+    );
   }
 
-  return (
-    <div className="container" data-test="component-app">
-      <Input secretWord={state.getSecretWord} />
-    </div>
-  );
 }
 export default App;

@@ -18,10 +18,11 @@ export const findByTestAttr = (wrapper, val) => {
  * @returns {CheckError}
  */
 export const checkProps = (component, conformingProps) => {
-  return checkPropTypes(
+  const result = checkPropTypes(
     component.propTypes,
     conformingProps,
     'prop',
     component.name,
   );
+  expect(result).toBe(undefined);
 }

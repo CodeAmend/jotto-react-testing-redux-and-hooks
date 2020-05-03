@@ -29,4 +29,4 @@ LanguagePicker.propTypes = {
   setLanguage: PropTypes.func.isRequired,
 }
 
-export default LanguagePicker
+export default LanguagePicker;

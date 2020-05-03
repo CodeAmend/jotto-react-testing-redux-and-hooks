@@ -1,6 +1,6 @@
 const languageStrings = {
   en: {
-    congrats: 'Congrats! You guessed it!',
+    congrats: 'Congratulations! You guessed the word!',
     submit: 'Submit',
     guessPrompt: 'Try to guess the secret word!',
     guessInputPlaceholder: 'enter guess',

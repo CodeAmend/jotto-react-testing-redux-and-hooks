@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import languageContext from './contexts/languageContext';
+
+import stringModule from './helpers/strings';
 
 
 /**
@@ -8,11 +11,12 @@ import PropTypes from 'prop-types';
  * @returns {JSX.Element} render or null
  */
 const Congrats = (props) => {
+  const language = React.useContext(languageContext);
   if (props.success) {
     return (
       <div className="alert alert-success" data-test="component-congrats">
         <span data-test="congrats-message">
-          Congratulations! You guessed the word!
+          {stringModule.getStringByLanguage(language, 'congrats')}
         </span>
       </div>
     );

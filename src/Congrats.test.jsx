@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import languageContext from './contexts/languageContext';
+import successContext from './contexts/successContext';
 import { findByTestAttr } from './test/testUtils';
 
 import Congrats from './Congrats';
@@ -16,7 +17,9 @@ const setup = ({ success, language }) => {
   language = language || 'en';
   return mount(
     <languageContext.Provider value={language}>
-      <Congrats success={success} />
+      <successContext.SuccessProvider value={[success, jest.fn()]}>
+        <Congrats />
+      </successContext.SuccessProvider>
     </languageContext.Provider>
   );
 }

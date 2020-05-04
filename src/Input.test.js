@@ -2,18 +2,21 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { checkProps, findByTestAttr } from './test/testUtils';
 import languageContext from './contexts/languageContext';
+import successContext from './contexts/successContext';
 
 import Input from './Input';
 
 
-
-const setup = ({ language, secretWord }={}) => {
+const setup = ({ success, language, secretWord }={}) => {
   language = language || 'en';
   secretWord = secretWord || 'party';
+  success = success || false;
 
   return mount(
     <languageContext.Provider value={language}>
-      <Input secretWord={secretWord} />
+      <successContext.SuccessProvider value={[success, jest.fn()]}>
+        <Input secretWord={secretWord} />
+      </successContext.SuccessProvider>
     </languageContext.Provider>
   );
 }
@@ -82,5 +85,12 @@ describe('languageContext', () => {
     const wrapper = setup({ language: 'emoji' });
     const inputBox = findByTestAttr(wrapper, 'submit-button')
     expect(inputBox.text()).toBe('🚀');
+  });
+});
+
+describe('successContext', () => {
+  test('does not render with success=true', () => {
+    const wrapper = setup({ success: true });
+    expect(wrapper.isEmptyRender()).toEqual(true);
   });
 });
